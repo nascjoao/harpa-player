@@ -1,7 +1,6 @@
 import React from "react";
 import type { Meta, StoryFn } from "@storybook/react";
-import { PlayerProvider } from ".";
-import { usePlayer } from "../..";
+import { usePlayer, PlayerProvider } from "@harpa-player";
 
 const meta: Meta = {
     title: "Contexts/Player",

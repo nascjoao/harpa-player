@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Player from ".";
+import { Player } from "@harpa-player";
 
 const meta = {
     title: "Example/Player",
