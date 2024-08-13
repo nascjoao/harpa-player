@@ -6,7 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import pkg from "./package.json" assert { type: "json" };
 
 export default {
-    input: "src/index.tsx",
+    input: "src/index.ts",
     output: [
         {
             file: pkg.main,
@@ -23,7 +23,15 @@ export default {
         peerDepsExternal(),
         resolve(),
         commonjs(),
-        typescript({ tsconfig: "./tsconfig.json" }),
+        typescript({
+            tsconfig: "./tsconfig.json",
+            exclude: [
+                "**/*.test.ts",
+                "**/*.test.tsx",
+                "**/*.stories.ts",
+                "**/*.stories.tsx",
+            ],
+        }),
         terser(),
     ],
     external: ["react"],
