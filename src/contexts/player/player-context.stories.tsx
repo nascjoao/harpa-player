@@ -1,6 +1,7 @@
+import React from "react";
 import type { Meta, StoryFn } from "@storybook/react";
-import { PlayerProvider, PlayerContext } from ".";
-import React, { useContext } from "react";
+import { PlayerProvider } from ".";
+import { usePlayer } from "../..";
 
 const meta: Meta = {
     title: "Contexts/Player",
@@ -21,7 +22,7 @@ export default meta;
 type Story = StoryFn<typeof meta>;
 
 export const Primary: Story = () => {
-    const { isPlaying, play, pause } = useContext(PlayerContext);
+    const { isPlaying, play, pause } = usePlayer();
 
     const track = {
         title: "Test title",
