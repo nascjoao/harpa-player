@@ -12,7 +12,11 @@
         "moduleResolution": "node",
         "isolatedModules": true,
         "strict": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "baseUrl": ".",
+        "paths": {
+            "@harpa-player": ["src/index.ts"]
+        }
     },
     "include": ["src"]
 }
