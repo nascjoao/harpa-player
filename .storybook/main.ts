@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
+import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import path from "path";
 
 const config: StorybookConfig = {
@@ -26,10 +27,12 @@ const config: StorybookConfig = {
         if (!config.resolve) {
             config.resolve = {};
         }
-        config.resolve.alias = {
-            ...config.resolve.alias,
-            "@harpa-player": path.resolve(__dirname, "../src/index.ts"),
-        };
+        config.resolve.plugins = [
+            ...(config.resolve.plugins || []),
+            new TsconfigPathsPlugin({
+                extensions: config.resolve.extensions,
+            }),
+        ];
 
         return config;
     },

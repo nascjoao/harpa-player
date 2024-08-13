@@ -1,7 +1,7 @@
 type Track = {
-    title: string | null;
-    artist: string | null;
-    thumbnail: string | null;
+    title?: string | null;
+    artist?: string | null;
+    thumbnail?: string | null;
     audioUrl: string;
 };
 
@@ -11,5 +11,6 @@ type PlayerContextType = {
     play: (track: Track) => void;
     pause: () => void;
     resume: () => void;
-    stop: () => void;
+    stop: (callback?: Function) => void;
+    load: (track: Track) => void;
 };

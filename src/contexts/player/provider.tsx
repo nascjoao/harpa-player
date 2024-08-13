@@ -4,14 +4,29 @@ import { PlayerContext } from ".";
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
     const [isPlaying, setIsPlaying] = React.useState(false);
     const [currentTrack, setCurrentTrack] = React.useState<Track | null>(null);
+    const audio = React.useRef<HTMLAudioElement | null>(null);
+
+    React.useEffect(() => {
+        if (!currentTrack) return;
+        audio.current = new Audio(currentTrack.audioUrl);
+    }, [currentTrack]);
+
+    const normalizeTrack = (track: Track) => {
+        track.title = track.title || null;
+        track.artist = track.artist || null;
+        track.thumbnail = track.thumbnail || null;
+    };
 
     const play = (track: Track) => {
+        normalizeTrack(track);
         setCurrentTrack(track);
         setIsPlaying(true);
+        audio.current?.play();
     };
 
     const pause = () => {
         setIsPlaying(false);
+        audio.current?.pause();
     };
 
     const resume = () => {
@@ -19,11 +34,33 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
             return;
         }
         setIsPlaying(true);
+        audio.current?.play();
     };
 
-    const stop = () => {
-        setCurrentTrack(null);
-        setIsPlaying(false);
+    const stop = (callback?: Function) => {
+        setCurrentTrack(() => {
+            setIsPlaying(false);
+            audio.current?.pause();
+            audio.current = null;
+            if (callback) {
+                callback();
+            }
+            return null;
+        });
+    };
+
+    const load = (track: Track) => {
+        if (isPlaying && audio.current) {
+            throw new Error(
+                'A track is already playing. You must \
+stop the current track before loading a new one. If you tried \
+to call "stop" and then "load", make sure to pass the "load" \
+function as an argument of the "stop" to ensure the new track \
+is loaded after the current track is stopped.',
+            );
+        }
+        normalizeTrack(track);
+        setCurrentTrack(track);
     };
 
     return (
@@ -35,6 +72,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
                 pause,
                 resume,
                 stop,
+                load,
             }}
         >
             {children}

@@ -15,7 +15,8 @@
         "resolveJsonModule": true,
         "baseUrl": ".",
         "paths": {
-            "@harpa-player": ["src/index.ts"]
+            "@harpa-player": ["src/index.ts"],
+            "@/*": ["src/*"]
         }
     },
     "include": ["src"]
