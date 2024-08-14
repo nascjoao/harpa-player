@@ -94,8 +94,28 @@ Example.parameters = {
                     How to reproduce this example in your project?
                 </h2>
                 <p>
+                    Wrap the component you want to use the player with the
+                    PlayerProvider component. e.g.: if you want to use the
+                    player in the whole application, wrap the App component with
+                    the PlayerProvider. This will make the player available in
+                    the whole application even if you navigate to different
+                    routes.
+                </p>
+                <DocBlock.Source
+                    code={`import { PlayerProvider } from "harpa-player";
+
+function App() {
+    return (
+        <PlayerProvider>
+            {/* Your app components */}
+        </PlayerProvider>
+    );
+}`}
+                />
+                <p>
                     Import the <code>usePlayer</code> hook from the{" "}
-                    <code>harpa-player</code> package.
+                    <code>harpa-player</code> package where you want to consume
+                    the player.
                 </p>
                 <DocBlock.Source
                     code={`import { usePlayer } from "harpa-player";`}
@@ -104,7 +124,7 @@ Example.parameters = {
                     <p>
                         Note: The <code>usePlayer</code> is a hook to interact
                         with the player. It returns the player state and methods
-                        to control the player.
+                        to control it.
                     </p>
                     <p>
                         You can create elements the way you want to control the
