@@ -68,6 +68,8 @@ is loaded after the current track is stopped.',
         <PlayerContext.Provider
             value={{
                 isPlaying,
+                duration: audio.current?.duration ?? null,
+                currentTime: audio.current?.currentTime ?? null,
                 currentTrack,
                 play,
                 pause,
