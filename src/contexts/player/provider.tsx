@@ -1,5 +1,6 @@
 import React from "react";
 import { PlayerContext } from ".";
+import { type Track } from "../..";
 
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
     const [isPlaying, setIsPlaying] = React.useState(false);

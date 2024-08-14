@@ -1,5 +1,6 @@
 import React from "react";
 import { PlayerContext } from "@/contexts/player";
+import { type Track } from "../..";
 
 export default function usePlayer(track?: Track) {
     const context = React.useContext(PlayerContext);
