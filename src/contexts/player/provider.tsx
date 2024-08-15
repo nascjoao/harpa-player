@@ -6,11 +6,24 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     const [isPlaying, setIsPlaying] = React.useState(false);
     const [currentTrack, setCurrentTrack] = React.useState<Track | null>(null);
     const audio = React.useRef<HTMLAudioElement | null>(null);
+    const [duration, setDuration] = React.useState<number | null>(null);
+    const [currentTime, setCurrentTime] = React.useState<number | null>(null);
 
     React.useEffect(() => {
         if (!currentTrack) return;
         audio.current = new Audio(currentTrack.audioUrl);
+        audio.current.addEventListener("loadedmetadata", () => {
+            setDuration(audio.current?.duration ?? null);
+            setCurrentTime(audio.current?.currentTime ?? null);
+        });
     }, [currentTrack]);
+
+    React.useEffect(() => {
+        if (!audio.current) return;
+        audio.current.addEventListener("timeupdate", () => {
+            setCurrentTime(audio.current?.currentTime ?? null);
+        });
+    }, [audio.current]);
 
     const normalizeTrack = (track: Track) => {
         track.title = track.title || null;
@@ -68,8 +81,8 @@ is loaded after the current track is stopped.',
         <PlayerContext.Provider
             value={{
                 isPlaying,
-                duration: audio.current?.duration ?? null,
-                currentTime: audio.current?.currentTime ?? null,
+                duration,
+                currentTime,
                 currentTrack,
                 play,
                 pause,
