@@ -8,6 +8,8 @@ export type Track = {
 export type PlayerContextType = {
     isPlaying: boolean;
     currentTrack: Track | null;
+    currentTime: number | null;
+    duration: number | null;
     play: (track: Track) => void;
     pause: () => void;
     resume: () => void;

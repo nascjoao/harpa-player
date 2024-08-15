@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2024-08-15
+
+### Bug Fixes
+
+- *(player)* Use state for currentTime and duration to guarantee its updates
+
+
+### Documentation
+
+- *(handling durations)* Create example of how to format time in harpa
+- *(simple player)* Add step to wrap application with PlayerProvider
+
+
+### Features
+
+- *(player)* Return currentTime and duration in seconds
+- *(utils)* Create getTimeFromDuration to convert seconds to a readable format
+- *(utils)* Improve getTimeFromDuration to be able to escape blocks
+
+
+### Miscellaneous Tasks
+
+- *(metadata)* Update package.json with homepage and repository URLs
+- *(release)* Update CHANGELOG.md for v0.2.0
+
+
+### Testing
+
+- *(player)* Mock audio.addEventListener
+
+
 ## [0.1.1] - 2024-08-14
 
 ### Bug Fixes
