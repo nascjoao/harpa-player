@@ -6,6 +6,11 @@
     "module": "dist/index.es.js",
     "jsnext:main": "dist/index.es.js",
     "types": "dist/harpa-player.d.ts",
+    "homepage": "https://nascjoao.github.io/harpa-player",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nascjoao/harpa-player"
+    },
     "files": [
         "dist"
     ],
