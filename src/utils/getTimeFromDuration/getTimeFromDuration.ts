@@ -1,8 +1,9 @@
 export default function getTimeFromDuration(
+    duration: number | null,
     timePattern: string,
-    duration: number,
 ): string {
-    const blocksPattern = /(hh?|mm?|ss?)/gi;
+    duration = duration ?? 0;
+    const blocksPattern = /(hh?|mm?|ss?|\[[^\]]+\])/gi;
     const thereAreNoBlocks = timePattern.match(blocksPattern) === null;
 
     if (thereAreNoBlocks) {
@@ -19,7 +20,11 @@ export default function getTimeFromDuration(
         m: minutes,
         s: seconds,
     };
+
     return timePattern.replace(blocksPattern, (block) => {
+        if (block.startsWith("[") && block.endsWith("]")) {
+            return block.slice(1, -1);
+        }
         const blockKey = block[0].toLowerCase();
         const blockValue = time[blockKey];
         return blockValue.toString().padStart(block.length, "0");
